@@ -5,7 +5,8 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 
-public class conectaDAO {
+public class conectaDAO
+{
     
     public Connection connectDB()
     {
@@ -13,7 +14,7 @@ public class conectaDAO {
         
         try
         {        
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/uc11", "root", "331166cava");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/uc11?useSSL=false&allowPublicKeyRetrieval=true", "root", "331166cava");
             
         }
         catch (SQLException erro)
@@ -21,6 +22,6 @@ public class conectaDAO {
             JOptionPane.showMessageDialog(null, "Erro ConectaDAO" + erro.getMessage());
         }
         return conn;
-    }
+    }  
     
 }
