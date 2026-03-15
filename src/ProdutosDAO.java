@@ -60,6 +60,42 @@ public class ProdutosDAO {
         }
         
         return listagem;
-    }            
+    }
+    
+    public int venderProduto(int idProduto)
+    {
+        conn = new conectaDAO().connectDB();
+        int resultado;
+        
+        try
+        {
+            String sql = "UPDATE produtos SET status = ? WHERE id = ?";
+            prep = conn.prepareStatement(sql);
+            prep.setString(1, "VENDIDO");
+            prep.setInt(2, idProduto);
+            
+            resultado = prep.executeUpdate();
+            return resultado;
+        }
+        catch(SQLException ex)
+        {
+            System.out.println("Erro ao vender produto: " + ex.getMessage());
+            return ex.getErrorCode();
+        }
+        finally
+        {
+            try
+            {
+                if (prep != null) prep.close();
+                if (conn != null) conn.close();
+                
+            }
+            catch(SQLException e)
+            {
+                System.out.println("Erro ao fechar conexão: " + e.getMessage());
+            }
+        }
+    }
+    
 }
 
